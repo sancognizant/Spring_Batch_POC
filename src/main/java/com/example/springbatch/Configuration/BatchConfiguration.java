@@ -43,23 +43,21 @@ public class BatchConfiguration {
     @Autowired
     private DataSource dataSource;
 
-    private static final String NAME = "initialName";
-    private static final String AGE = "20";
-
     // Person Processor obj that has a method that returns the modified person data
-    @Bean
-    public PersonProcessor processor() {
-        return new PersonProcessor();
-    }
+//    @Bean
+//    public PersonProcessor processor() {
+//        return new PersonProcessor();
+//    }
 
 
     @Bean
-    ItemReader<Person> reader() {
-        JdbcCursorItemReader<Person> databaseReader = new JdbcCursorItemReader<Person>();
-        databaseReader.setDataSource(this.dataSource);
-        databaseReader.setSql("SELECT NAME, AGE FROM PERSON");
-        databaseReader.setRowMapper(new PersonMapper());
-        return databaseReader;
+   public ItemReader<Person> reader() {
+        return new JdbcCursorItemReaderBuilder<Person>()
+                .dataSource(this.dataSource)
+                .name("personReader")
+                .sql("SELECT * FROM PERSON")
+                .rowMapper(new PersonMapper())
+                .build();
     }
 
     // writes data back to the database
@@ -67,7 +65,7 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<Person> writer() {
         return new JdbcBatchItemWriterBuilder<Person>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO person (name,age) VALUES (:name, :age)")
+                .sql("INSERT INTO person (firstName,lastName) VALUES (:firstName, :lastName)")
                 .dataSource(this.dataSource)
                 .build();
     }
@@ -89,7 +87,7 @@ public class BatchConfiguration {
         return stepBuilderFactory.get("step1")
                 .<Person, Person>chunk(10)
                 .reader(reader())
-                .processor(processor())
+                //.processor(processor())
                 .writer(writer)
                 .build();
     }

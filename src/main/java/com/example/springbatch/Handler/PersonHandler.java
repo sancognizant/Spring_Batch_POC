@@ -31,7 +31,7 @@ public class PersonHandler {
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 
         int _age = Integer.parseInt(age);
-        Person p = new Person(name, _age);
+       // Person p = new Person(name, _age);
 
 
           // execute job through url call
@@ -48,6 +48,6 @@ public class PersonHandler {
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Mono.just(p.getName()), Person.class).switchIfEmpty(notFound);
+                .body(Mono.just(null), Person.class).switchIfEmpty(notFound);
     }
 }

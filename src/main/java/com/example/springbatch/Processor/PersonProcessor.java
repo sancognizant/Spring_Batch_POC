@@ -10,12 +10,12 @@ public class PersonProcessor implements ItemProcessor<Person, Person> {
 
     @Override
     public Person process(Person person) throws Exception {
-        System.out.println("Processing data to upper-case");
-        int age = person.getAge();
-        if(age <= 20)
-           person.setName(person.getName() + " "+"Millenial");
-        else
-            person.setName(person.getName() + " " + "Oldies");
+//        System.out.println("Processing data to upper-case");
+//        int age = person.getAge();
+//        if(age <= 20)
+//            person.setName(person.getName() + " "+"Millenial");
+//        else
+//            person.setName(person.getName() + " " + "Oldies");
         return person;
     }
 }

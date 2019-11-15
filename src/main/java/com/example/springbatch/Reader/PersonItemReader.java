@@ -25,7 +25,7 @@ public class PersonItemReader implements ItemReader<Person> {
     public Person read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
         if (!batchJobState) {
             int _age = Integer.parseInt(age);
-            Person person = new Person(name, _age);
+            Person person = new Person();
             batchJobState = true;
             return person;
         }
