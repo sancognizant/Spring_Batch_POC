@@ -50,9 +50,9 @@ public class BatchConfiguration {
 
     @StepScope
     @Bean
-    ItemReader<Person> reader(@Value("#{jobParameters[name]}") String name,
+    ItemReader<Person> reader(@Value("#{jobParameters[name]}") String names,
                               @Value("#{jobParameters[age]}") String age) {
-        return new PersonItemReader(name, age);
+        return new PersonItemReader(names, age);
     }
 
     // writes data back to the database
