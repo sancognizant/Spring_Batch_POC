@@ -15,6 +15,6 @@ public class PersonRouter {
     @Bean
     public RouterFunction<ServerResponse> routeSample(PersonHandler handler) {
         return
-                route(GET("/person/{name}/{age}").and(accept(MediaType.APPLICATION_JSON)), handler::getProduct);
+                route(GET("/person/{name}/{age}").and(accept(MediaType.APPLICATION_JSON)), handler::getPerson);
     }
 }

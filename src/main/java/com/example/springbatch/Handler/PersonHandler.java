@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+
 @Component
 public class PersonHandler {
     @Autowired
@@ -22,17 +23,18 @@ public class PersonHandler {
     Job job;
 
     // get 1 product from the database
-    public Mono<ServerResponse> getProduct(ServerRequest request) {
+    public Mono<ServerResponse> getPerson(ServerRequest request) {
         String name = request.pathVariable("name");
         String age = request.pathVariable("age");
 
-//        // if the server response cannot be found
+      // if the server response cannot be found
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 
         int _age = Integer.parseInt(age);
         Person p = new Person(name, _age);
 
-        // execute job through url call
+
+          // execute job through url call
         try {
             JobParameters jobParameters = new JobParametersBuilder()
                     .addString("name", name)

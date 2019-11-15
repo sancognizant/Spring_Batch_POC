@@ -54,6 +54,18 @@
 			<version>2.0.3.RELEASE</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-runner</artifactId>
+			<version>1.4.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 
