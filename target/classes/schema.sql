@@ -5,5 +5,5 @@ CREATE TABLE  person (
   PRIMARY KEY (id)
 );
 
---insert into person(name,age)
--- VALUES('name1',20), ('name2', 31), ('name3', 19);
+insert into person(name,age)
+ VALUES('name1',20), ('name2', 31), ('name3', 19);
