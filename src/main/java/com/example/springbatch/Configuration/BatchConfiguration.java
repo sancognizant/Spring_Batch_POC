@@ -44,10 +44,10 @@ public class BatchConfiguration {
     private DataSource dataSource;
 
     // Person Processor obj that has a method that returns the modified person data
-//    @Bean
-//    public PersonProcessor processor() {
-//        return new PersonProcessor();
-//    }
+    @Bean
+    public PersonProcessor processor() {
+        return new PersonProcessor();
+    }
 
 
     @Bean
@@ -65,7 +65,7 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<Person> writer() {
         return new JdbcBatchItemWriterBuilder<Person>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO person (firstName,lastName) VALUES (:firstName, :lastName)")
+                .sql("INSERT INTO person (firstName) VALUES (:firstName)")
                 .dataSource(this.dataSource)
                 .build();
     }
@@ -87,7 +87,7 @@ public class BatchConfiguration {
         return stepBuilderFactory.get("step1")
                 .<Person, Person>chunk(10)
                 .reader(reader())
-                //.processor(processor())
+                .processor(processor())
                 .writer(writer)
                 .build();
     }

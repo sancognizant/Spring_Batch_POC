@@ -15,6 +15,10 @@ public class Person {
     private String startDate;
     private String SSNCode;
     private String zipCode;
+     private String server;
+    private String ruleset;
+    private String _user;
+    private String password;
     private float yearlyIncome;
     private float creditScore;
     private float amount;
@@ -22,12 +26,9 @@ public class Person {
     private float yearlyInterestRate;
     private int showtrace;
 
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
-    public Person(String firstName, String lastName, String birthDate, String bankruptcyDate, String bankruptcyReason, String bankruptcyChapter, String startDate, String SSNCode, String zipCode, float yearlyIncome, float creditScore, float amount, float duration, float yearlyInterestRate, int showtrace) {
+
+    public Person(String firstName, String lastName, String birthDate, String bankruptcyDate, String bankruptcyReason, String bankruptcyChapter, String startDate, String SSNCode, String zipCode, String server, String ruleset, String _user, String password, float yearlyIncome, float creditScore, float amount, float duration, float yearlyInterestRate, int showtrace) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -37,6 +38,10 @@ public class Person {
         this.startDate = startDate;
         this.SSNCode = SSNCode;
         this.zipCode = zipCode;
+        this.server = server;
+        this.ruleset = ruleset;
+        this._user = _user;
+        this.password = password;
         this.yearlyIncome = yearlyIncome;
         this.creditScore = creditScore;
         this.amount = amount;
@@ -49,14 +54,9 @@ public class Person {
 
     }
 
-    // getters and setters
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public Person(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getFirstName() {
@@ -131,6 +131,38 @@ public class Person {
         this.zipCode = zipCode;
     }
 
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public String getRuleset() {
+        return ruleset;
+    }
+
+    public void setRuleset(String ruleset) {
+        this.ruleset = ruleset;
+    }
+
+    public String get_user() {
+        return _user;
+    }
+
+    public void set_user(String _user) {
+        this._user = _user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public float getYearlyIncome() {
         return yearlyIncome;
     }
@@ -178,4 +210,8 @@ public class Person {
     public void setShowtrace(int showtrace) {
         this.showtrace = showtrace;
     }
+
+
+
+
 }

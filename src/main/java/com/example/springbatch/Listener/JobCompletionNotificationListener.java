@@ -25,11 +25,11 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         if (jobExecution.getStatus() == COMPLETED) {
             System.out.println("!!! JOB FINISHED! Time to verify the results");
 
-            jdbcTemplate.query("SELECT FIRSTNAME, LASTNAME FROM person",
+            jdbcTemplate.query("SELECT FIRSTNAME FROM person",
                     (rs, row) -> new Person(
-                            rs.getString(1),
-                            rs.getString(2))
-            ).forEach(person -> System.out.println("Found <" + person.getFirstName() + "> in the database."));
+                            rs.getString(1)
+                           )
+            ).forEach(person -> System.out.println(""));
         }
     }
 }

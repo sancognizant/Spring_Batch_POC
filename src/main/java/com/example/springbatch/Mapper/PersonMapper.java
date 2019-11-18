@@ -19,6 +19,12 @@ public class PersonMapper implements RowMapper<Person> {
     private String START_DATE_COLUMN = "startDate";
     private String SSNCODE_COLUMN = "SSNCode";
     private String ZIP_CODE_COLUMN = "zipCode";
+
+    private String SERVER_COLUMN = "server";
+    private String RULE_SET = "ruleset";
+    private String USER = "_user";
+    private String PASSWORD = "password";
+
     private String YEARLY_INCOME_COLUMN = "yearlyIncome";
     private String CREDIT_SCORE_COLUMN = "creditScore";
     private String AMOUNT_COLUMN = "amount";
@@ -41,21 +47,16 @@ public class PersonMapper implements RowMapper<Person> {
         person.setStartDate(rs.getString(START_DATE_COLUMN));
         person.setSSNCode(rs.getString(SSNCODE_COLUMN));
         person.setZipCode(rs.getString(ZIP_CODE_COLUMN));
+        person.setServer(rs.getString(SERVER_COLUMN));
+        person.setRuleset(rs.getString(RULE_SET));
+        person.set_user(rs.getString(USER));
+        person.setPassword(rs.getString(PASSWORD));
         person.setYearlyIncome(rs.getFloat(YEARLY_INCOME_COLUMN));
         person.setCreditScore(rs.getFloat(CREDIT_SCORE_COLUMN));
         person.setAmount(rs.getFloat(AMOUNT_COLUMN));
         person.setDuration(rs.getFloat(DURATION_COLUMN));
         person.setYearlyInterestRate(rs.getFloat(YEARLY_INTEREST_RATE_COLUMN));
         person.setShowtrace(rs.getInt(SHOW_TRACE_COLUMN));
-
-
-
-
-
-
-
-
-
         person.setYearlyIncome(rs.getFloat(YEARLY_INCOME_COLUMN));
         return person;
     }
