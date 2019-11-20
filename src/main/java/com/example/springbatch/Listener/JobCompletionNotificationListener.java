@@ -1,6 +1,6 @@
 package com.example.springbatch.Listener;
 
-import com.example.springbatch.model.Person;
+import com.example.springbatch.model.ResponseODM;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,16 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         if (jobExecution.getStatus() == COMPLETED) {
             System.out.println("!!! JOB FINISHED! Time to verify the results");
 
-            jdbcTemplate.query("SELECT FIRSTNAME FROM person",
-                    (rs, row) -> new Person(
-                            rs.getString(1)
-                           )
-            ).forEach(person -> System.out.println(""));
+            jdbcTemplate.query("SELECT FIRSTNAME, AMOUNT, YEARLYINCOME, " +
+                            "STATUS, MESSAGES FROM responseOdm ",
+                    (rs, row) -> new ResponseODM(
+                            rs.getString(1),
+                            rs.getFloat(2),
+                            rs.getFloat(3),
+                            rs.getString(4),
+                            rs.getString(5)
+                    )
+            ).forEach(responseODM -> System.out.println(responseODM.getAmount()));
         }
     }
 }

@@ -4,27 +4,23 @@ package com.example.springbatch.Configuration;
 import com.example.springbatch.Listener.JobCompletionNotificationListener;
 import com.example.springbatch.Mapper.PersonMapper;
 import com.example.springbatch.Processor.PersonProcessor;
-import com.example.springbatch.Reader.PersonItemReader;
 import com.example.springbatch.model.Person;
+import com.example.springbatch.model.ResponseODM;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
-import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.DataSource;
 
@@ -51,7 +47,7 @@ public class BatchConfiguration {
 
 
     @Bean
-   public ItemReader<Person> reader() {
+    public ItemReader<Person> reader() {
         return new JdbcCursorItemReaderBuilder<Person>()
                 .dataSource(this.dataSource)
                 .name("personReader")
@@ -62,10 +58,12 @@ public class BatchConfiguration {
 
     // writes data back to the database
     @Bean
-    public JdbcBatchItemWriter<Person> writer() {
-        return new JdbcBatchItemWriterBuilder<Person>()
+    public JdbcBatchItemWriter<ResponseODM> writer() {
+        return new JdbcBatchItemWriterBuilder<ResponseODM>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO person (firstName) VALUES (:firstName)")
+                .sql("INSERT INTO responseOdm (FIRSTNAME, " +
+                        "AMOUNT, YEARLYINCOME, STATUS, MESSAGES) " +
+                        "VALUES (:firstName, :amount, :yearlyIncome, :status, :messages)")
                 .dataSource(this.dataSource)
                 .build();
     }
@@ -83,12 +81,12 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step step1(JdbcBatchItemWriter<Person> writer) {
+    public Step step1() {
         return stepBuilderFactory.get("step1")
-                .<Person, Person>chunk(10)
+                .<Person, ResponseODM>chunk(10)
                 .reader(reader())
                 .processor(processor())
-                .writer(writer)
+                .writer(writer())
                 .build();
     }
 }

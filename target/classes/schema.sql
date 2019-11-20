@@ -24,8 +24,18 @@ CREATE TABLE  person (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE  responseOdm (
+  id INTEGER  NOT NULL AUTO_INCREMENT,
+  firstName VARCHAR(64),
+   amount float,
+  yearlyIncome float,
+  status VARCHAR(64),
+  messages VARCHAR(64),
+  PRIMARY KEY (id)
+);
+
 insert into person(
- firstName,
+  firstName,
   lastName,
   birthDate,
   bankruptcyDate,

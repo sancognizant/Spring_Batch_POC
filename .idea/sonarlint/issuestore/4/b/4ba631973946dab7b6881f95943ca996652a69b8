@@ -1,0 +1,9 @@
+
+ysquid:UselessImportCheck"PRemove this unused import 'org.springframework.jdbc.core.BeanPropertyRowMapper'.(ﬂ©≈¥ˇˇˇˇˇ
+}squid:UselessImportCheck"YRemove this unused import 'org.springframework.batch.item.database.JdbcCursorItemReader'.(¥ﬂáä
+ssquid:UselessImportCheck"ORemove this unused import 'org.springframework.beans.factory.annotation.Value'.(Ï¯õê
+osquid:UselessImportCheck"LRemove this unused import 'com.example.springbatch.Reader.PersonItemReader'.(…Ï˝z
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(’‰ºÔ
+Çsquid:UselessImportCheck"^Remove this unused import 'org.springframework.batch.core.configuration.annotation.StepScope'.(Ó†€∂
+csquid:S3305)"LInject this field value directly into "step1", the only method that uses it.(ÙÇ‡À
+msquid:S3305%"VInject this field value directly into "importPersonJob", the only method that uses it.(ˇ£Ó∞
