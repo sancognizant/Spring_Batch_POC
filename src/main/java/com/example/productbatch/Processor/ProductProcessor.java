@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 import org.springframework.batch.item.ItemProcessor;
 
-
 import java.io.IOException;
 import java.util.Map;
 
@@ -26,10 +25,10 @@ public class ProductProcessor implements ItemProcessor<Product, ResponseDiscount
         String json = new StringBuilder()
                 .append("{")
                 .append("\"product\":\"" + product.getProductName() + "\",")
-                .append("\"quantity\":\"" + product.getQuantity() + "\",")
+                .append("\"quantity\":\"" + product.getQuantity() + "\"")
                 .append("}").toString();
 
-       // System.out.println(json);
+        System.out.println(json);
 
         // json request body
         RequestBody body = RequestBody.create(
@@ -57,10 +56,10 @@ public class ProductProcessor implements ItemProcessor<Product, ResponseDiscount
             Map<String, Object> map = mapper.readValue(result, Map.class);
 
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                showData(entry);
+               responseDiscount = getData(entry);
             }
-            responseDiscount.setMessage("Your discount is: " + responseDiscount.getDiscount());
 
+    return responseDiscount;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -69,14 +68,18 @@ public class ProductProcessor implements ItemProcessor<Product, ResponseDiscount
     }
 
     // getting the output data from the map and inserting into the response obj
-    void showData(Map.Entry<String, Object> map) {
+    ResponseDiscount getData(Map.Entry<String, Object> map) {
+        ResponseDiscount responseDiscount1 = new ResponseDiscount();
         switch (map.getKey()) {
             case "Discount": {
                 System.out.println(map.getValue());
-                responseDiscount.setDiscount((Float) map.getValue());
-            }
+                responseDiscount1.setDiscount((Double) map.getValue());
+                responseDiscount1.setMessage("Your discount is: " + map.getValue());
                 break;
+            }
+
         }
+        return responseDiscount1;
     }
 }
 

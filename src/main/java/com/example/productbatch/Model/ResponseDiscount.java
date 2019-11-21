@@ -8,10 +8,10 @@ import lombok.Setter;
 public class ResponseDiscount {
     // properties
     private int id;
-    private float discount;
+    private double discount;
     private String message;
 
-    public ResponseDiscount(float discount, String message) {
+    public ResponseDiscount(double discount, String message) {
         this.discount = discount;
         this.message = message;
     }

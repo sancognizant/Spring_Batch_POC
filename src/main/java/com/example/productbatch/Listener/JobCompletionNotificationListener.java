@@ -26,10 +26,10 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
             jdbcTemplate.query("SELECT discount, message" +
                             " FROM responseDiscount ",
                     (rs, row) -> new ResponseDiscount(
-                            rs.getFloat(1),
+                            rs.getDouble(1),
                             rs.getString(2)
                     )
-            ).forEach(responseODM -> System.out.println(responseODM.getDiscount()));
+            ).forEach(responseODM -> System.out.println(responseODM.getMessage()));
         }
     }
 }
